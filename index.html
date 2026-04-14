@@ -776,7 +776,7 @@
       </div>
     </section>
 
-    <div class="footer">Hecha para celebrar a lo grande con color, música y corazón caribeño.</div>
+    <div class="footer">Hecha para celebrar a lo grande con color, música y corazón caribeño.<br>Desarrollado por Alvaro Ariza</div>
   </div>
 
   <audio id="bgMusic" loop preload="none">
@@ -799,8 +799,15 @@
     document.getElementById('wazeBtn').href = `https://waze.com/ul?q=${encodedLocation}`;
     document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${encodedLocation}&output=embed`;
 
-    scrollBtn.addEventListener('click', () => {
+    scrollBtn.addEventListener('click', async () => {
       document.getElementById('sobre').scrollIntoView({ behavior: 'smooth' });
+      if (!playing) {
+        try {
+          await music.play();
+          musicBtn.textContent = '❚❚';
+          playing = true;
+        } catch (error) {}
+      }
     });
 
     const openEnvelope = () => {
@@ -883,6 +890,17 @@
         alert('Toca nuevamente para activar la música. Algunos navegadores bloquean la reproducción automática.');
       }
     });
+
+    async function tryAutoPlayOnLoad() {
+      if (playing) return;
+      try {
+        await music.play();
+        musicBtn.textContent = '❚❚';
+        playing = true;
+      } catch (error) {}
+    }
+
+    window.addEventListener('load', tryAutoPlayOnLoad);
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
