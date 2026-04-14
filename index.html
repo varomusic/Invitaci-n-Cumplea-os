@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invitación Premium | Luz Marina Gutierrez</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --yellow: #ffd43b;
+      --orange: #ff8c42;
+      --pink: #ff4fa3;
+      --red: #ff4d4d;
+      --blue: #1db8ff;
+      --teal: #00c7b1;
+      --purple: #7d4dff;
+      --ink: #2b2140;
+      --cream: #fffaf3;
+      --card: rgba(255, 255, 255, 0.9);
+      --shadow: 0 18px 45px rgba(38, 17, 68, 0.18);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(255,212,59,.45), transparent 25%),
+        radial-gradient(circle at top right, rgba(29,184,255,.35), transparent 20%),
+        linear-gradient(135deg, #ffcf3f 0%, #ff8c42 18%, #ff4fa3 42%, #7d4dff 70%, #18b9ff 100%);
+      overflow-x: hidden;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.1));
+      backdrop-filter: blur(2px);
+      position: relative;
+      box-shadow: 0 0 40px rgba(0,0,0,.08);
+    }
+
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      text-align: center;
+      overflow: hidden;
+      background:
+        linear-gradient(to bottom, rgba(42, 18, 61, .24), rgba(42, 18, 61, .62)),
+        url('foto-portada.jpg') center/cover no-repeat;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      filter: blur(14px);
+      opacity: .45;
+      z-index: 0;
+      animation: floatGlow 7s ease-in-out infinite;
+    }
+
+    .hero::before {
+      background: rgba(255, 212, 59, .85);
+      top: -40px;
+      left: -40px;
+    }
+
+    .hero::after {
+      background: rgba(29, 184, 255, .85);
+      bottom: -30px;
+      right: -30px;
+      animation-delay: 1.2s;
+    }
+
+    .hero-card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: 30px 22px;
+      border-radius: 34px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.28);
+      backdrop-filter: blur(9px);
+      box-shadow: 0 18px 45px rgba(0,0,0,.2);
+      color: #fff;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      font-size: .9rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .script {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.2rem;
+      margin: 0;
+      line-height: 1.1;
+      text-shadow: 0 4px 14px rgba(0,0,0,.2);
+    }
+
+    .hero-name {
+      margin: 10px 0 0;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 8vw, 3.7rem);
+      line-height: .96;
+    }
+
+    .hero-age {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding: 9px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.3);
+      font-weight: 600;
+    }
+
+    .hero-date {
+      margin-top: 18px;
+      font-size: .98rem;
+      letter-spacing: 2.8px;
+      text-transform: uppercase;
+    }
+
+    .hero-photo {
+      width: 122px;
+      height: 122px;
+      margin: 20px auto 0;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid rgba(255,255,255,.9);
+      box-shadow: 0 14px 25px rgba(0,0,0,.22);
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-btn {
+      margin-top: 24px;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--yellow), #fff0a3);
+      color: var(--ink);
+      font-weight: 700;
+      font-size: .95rem;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    .section {
+      padding: 34px 20px;
+      position: relative;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin: 0 0 10px;
+      text-align: center;
+      color: #fff;
+      text-shadow: 0 4px 14px rgba(42, 18, 61, .22);
+    }
+
+    .section-subtitle {
+      max-width: 360px;
+      margin: 0 auto 24px;
+      text-align: center;
+      color: rgba(255,255,255,.92);
+      line-height: 1.65;
+      font-size: .95rem;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .chip {
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.25);
+      color: #fff;
+      font-weight: 600;
+      font-size: .82rem;
+      backdrop-filter: blur(6px);
+    }
+
+    .envelope-area { text-align: center; }
+
+    .envelope-wrap {
+      perspective: 1200px;
+      display: flex;
+      justify-content: center;
+      margin: 28px auto 14px;
+    }
+
+    .envelope {
+      width: 318px;
+      height: 228px;
+      position: relative;
+      cursor: pointer;
+      transform-style: preserve-3d;
+    }
+
+    .env-back, .env-front, .env-flap, .letter {
+      position: absolute;
+      border-radius: 14px;
+    }
+
+    .env-back {
+      inset: 0;
+      background: linear-gradient(135deg, var(--pink), var(--orange), var(--yellow));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .env-back::before,
+    .env-back::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,.12);
+      clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .env-front {
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 72%;
+      background: linear-gradient(135deg, #ff5f54, #ff8c42, #ffd43b);
+      clip-path: polygon(0 0, 50% 42%, 100% 0, 100% 100%, 0 100%);
+      z-index: 4;
+    }
+
+    .env-flap {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 58%;
+      background: linear-gradient(135deg, var(--red), var(--pink), var(--purple));
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: top center;
+      z-index: 6;
+      transition: transform 1s ease;
+      box-shadow: 0 6px 18px rgba(0,0,0,.18);
+    }
+
+    .letter {
+      width: 84%;
+      left: 8%;
+      height: 176px;
+      bottom: 16px;
+      z-index: 3;
+      background: linear-gradient(180deg, #fffdf8 0%, #fff4dd 100%);
+      padding: 16px 14px;
+      box-shadow: 0 14px 30px rgba(0,0,0,.15);
+      transition: transform 1s ease, opacity .6s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+      color: var(--ink);
+    }
+
+    .letter-photo {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid #fff;
+      box-shadow: 0 8px 18px rgba(0,0,0,.14);
+    }
+
+    .letter-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ffe279, #ffd43b);
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .letter h3 {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+    }
+
+    .letter p {
+      margin: 0;
+      font-size: .9rem;
+      line-height: 1.45;
+      color: #5e4b74;
+    }
+
+    .envelope.open .env-flap { transform: rotateX(180deg); }
+    .envelope.open .letter { transform: translateY(-114px); }
+
+    .hint {
+      color: #fff;
+      opacity: .92;
+      font-size: .92rem;
+    }
+
+    .details {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(30px);
+      transition: opacity .8s ease, transform .8s ease, visibility .8s;
+      pointer-events: none;
+    }
+
+    .details.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .main-photo-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+      border: 3px solid rgba(255,255,255,.4);
+    }
+
+    .main-photo-card img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .main-photo-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 22px;
+      text-align: left;
+      color: #fff;
+      background: linear-gradient(to top, rgba(20,8,31,.68), rgba(20,8,31,.12));
+    }
+
+    .main-photo-overlay h3 {
+      margin: 0;
+      font-family: 'Pacifico', cursive;
+      font-size: 2rem;
+    }
+
+    .main-photo-overlay p {
+      margin: 8px 0 0;
+      max-width: 260px;
+      line-height: 1.5;
+      font-size: .95rem;
+    }
+
+    .glass-card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.45);
+      border-radius: var(--radius);
+      box-shadow: 0 14px 32px rgba(38, 17, 68, .12);
+      padding: 20px;
+      margin-bottom: 18px;
+      backdrop-filter: blur(8px);
+    }
+
+    .glass-card h3 {
+      margin: 0 0 12px;
+      text-align: center;
+      font-size: 1.7rem;
+      color: var(--ink);
+      font-family: 'Playfair Display', serif;
+    }
+
+    .intro-copy {
+      text-align: center;
+      line-height: 1.7;
+      color: #5a4a6f;
+      margin: 0;
+    }
+
+    .info-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .info-item {
+      background: #fff;
+      border-radius: 22px;
+      padding: 16px;
+      text-align: center;
+      border: 1px solid #f2dff5;
+    }
+
+    .label {
+      font-size: .76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.6px;
+      color: #9062a8;
+      margin-bottom: 8px;
+    }
+
+    .value {
+      font-size: 1.28rem;
+      line-height: 1.35;
+      color: var(--ink);
+      font-family: 'Playfair Display', serif;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .count-box {
+      background: linear-gradient(180deg, #fff, #fff7ea);
+      border-radius: 22px;
+      padding: 16px 10px;
+      text-align: center;
+      border: 1px solid #f0e1c8;
+    }
+
+    .count-box strong {
+      display: block;
+      font-size: 1.4rem;
+      color: #d24a73;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .count-box span {
+      font-size: .74rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #7d628d;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 22px;
+      box-shadow: 0 10px 20px rgba(0,0,0,.08);
+      display: block;
+    }
+
+    .collage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .collage-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      min-height: 180px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.11);
+      background: #fff;
+    }
+
+    .collage-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .collage-card span {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.88);
+      color: var(--ink);
+      font-size: .8rem;
+      font-weight: 700;
+    }
+
+    .actions {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .btn {
+      display: block;
+      text-decoration: none;
+      text-align: center;
+      padding: 14px 18px;
+      border-radius: 999px;
+      font-size: .95rem;
+      font-weight: 700;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pink), var(--red), var(--orange));
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-outline {
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid #f0d7ea;
+    }
+
+    .map-frame {
+      width: 100%;
+      height: 260px;
+      border: 0;
+      border-radius: 24px;
+      box-shadow: 0 10px 20px rgba(0,0,0,.08);
+      margin-top: 14px;
+    }
+
+    .footer {
+      padding: 8px 20px 34px;
+      text-align: center;
+      color: #fff;
+      font-size: .86rem;
+      opacity: .92;
+    }
+
+    .music-btn {
+      position: fixed;
+      right: 16px;
+      bottom: 20px;
+      z-index: 100;
+      border: none;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--yellow), var(--orange), var(--pink));
+      color: var(--ink);
+      box-shadow: var(--shadow);
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .confetti {
+      position: fixed;
+      top: -15px;
+      width: 10px;
+      height: 16px;
+      border-radius: 4px;
+      opacity: .9;
+      z-index: 999;
+      animation: fall linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes floatGlow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(14px); }
+    }
+
+    @media (max-width: 360px) {
+      .envelope { width: 288px; height: 208px; }
+      .countdown { grid-template-columns: repeat(2, 1fr); }
+      .main-photo-card img { height: 330px; }
+      .hero-name { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <button class="music-btn" id="musicBtn" aria-label="Reproducir música">♫</button>
+
+  <div class="page">
+    <section class="hero">
+      <div class="hero-card">
+        <p class="eyebrow">Fiesta Caribeña Premium</p>
+        <p class="script">¡Llegó la rumba!</p>
+        <h1 class="hero-name">Luz Marina<br>Gutierrez</h1>
+        <div class="hero-age">🎂 Celebrando 62 años</div>
+        <div class="hero-photo">
+          <img src="foto-principal.jpg" alt="Luz Marina Gutierrez">
+        </div>
+        <div class="hero-date">14 · septiembre · 2026 · 4:00 PM</div>
+        <div class="chip-row">
+          <span class="chip">🥁 Carnaval</span>
+          <span class="chip">💃 Baile</span>
+          <span class="chip">🍻 Alegría</span>
+        </div>
+        <button class="hero-btn" id="scrollToEnvelope">Abrir invitación</button>
+      </div>
+    </section>
+
+    <section class="section envelope-area" id="sobre">
+      <h2 class="section-title">Una noche llena de color</h2>
+      <p class="section-subtitle">Toca el sobre y descubre todos los detalles de esta celebración caribeña llena de alegría, música y sabor.</p>
+
+      <div class="envelope-wrap">
+        <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Abrir invitación">
+          <div class="env-back"></div>
+          <div class="letter">
+            <div class="letter-photo">
+              <img src="foto-principal.jpg" alt="Foto de Luz Marina">
+            </div>
+            <span class="badge">Invitación Especial</span>
+            <h3>¡Vamos a celebrar!</h3>
+            <p>Luz Marina cumple 62 años y quiere vivir una noche inolvidable contigo.</p>
+          </div>
+          <div class="env-front"></div>
+          <div class="env-flap"></div>
+        </div>
+      </div>
+
+      <div class="hint">Toca el sobre para empezar la fiesta 🎉</div>
+    </section>
+
+    <section class="section details" id="detailsSection">
+      <div class="main-photo-card">
+        <img src="foto-portada-secundaria.jpg" alt="Luz Marina celebrando">
+        <div class="main-photo-overlay">
+          <h3>¡Quien lo vive es quien lo goza!</h3>
+          <p>Prepárate para una celebración caribeña con mucha energía, amigos, música, color y un ambiente inolvidable.</p>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <h3>Bienvenidos a la fiesta</h3>
+        <p class="intro-copy">Con inmensa alegría, Luz Marina Gutierrez quiere compartir contigo sus 62 años en una reunión llena de baile, sonrisas, cerveza fría, sabor caribeño y la mejor compañía. Tu presencia hará esta noche aún más especial.</p>
+      </div>
+
+      <div class="glass-card">
+        <h3>Detalles del evento</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="label">Fecha</div>
+            <div class="value">14 de septiembre de 2026</div>
+          </div>
+          <div class="info-item">
+            <div class="label">Hora</div>
+            <div class="value">4:00 PM</div>
+          </div>
+          <div class="info-item">
+            <div class="label">Lugar</div>
+            <div class="value">Casa de Campo Las Marías</div>
+          </div>
+          <div class="info-item">
+            <div class="label">Regalo</div>
+            <div class="value">Lluvia de sobres</div>
+          </div>
+          <div class="info-item">
+            <div class="label">Dress code</div>
+            <div class="value">Informal o carnavalera</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <h3>Cuenta regresiva</h3>
+        <p class="intro-copy">Cada día nos acerca más a una tarde de música, brindis y celebración.</p>
+        <div class="countdown">
+          <div class="count-box"><strong id="days">00</strong><span>Días</span></div>
+          <div class="count-box"><strong id="hours">00</strong><span>Horas</span></div>
+          <div class="count-box"><strong id="minutes">00</strong><span>Min</span></div>
+          <div class="count-box"><strong id="seconds">00</strong><span>Seg</span></div>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <h3>Galería de Luz Marina</h3>
+        <div class="gallery">
+          <img src="foto1.jpg" alt="Luz Marina 1">
+          <img src="foto2.jpg" alt="Luz Marina 2">
+          <img src="foto3.jpg" alt="Luz Marina 3">
+          <img src="foto4.jpg" alt="Luz Marina 4">
+          <img src="foto5.jpg" alt="Luz Marina 5">
+          <img src="foto6.jpg" alt="Luz Marina 6">
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <h3>Ambiente de fiesta</h3>
+        <div class="collage">
+          <div class="collage-card">
+            <img src="combo1.jpg" alt="Luz Marina con cerveza y ambiente festivo">
+            <span>🍻 Brindis y alegría</span>
+          </div>
+          <div class="collage-card">
+            <img src="combo2.jpg" alt="Cumpleaños estilo carnaval">
+            <span>🎭 Sabor caribeño</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <h3>Ubicación</h3>
+        <p class="intro-copy">Llega fácil al evento con el mapa interactivo o abre la ruta directa en tu app favorita.</p>
+        <iframe class="map-frame" id="mapFrame" src="https://www.google.com/maps?q=Casa%20de%20Campo%20Las%20Mar%C3%ADas%20Valledupar&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="actions">
+          <a class="btn btn-secondary" id="mapsBtn" href="#" target="_blank" rel="noopener">Abrir en Google Maps</a>
+          <a class="btn btn-outline" id="wazeBtn" href="#" target="_blank" rel="noopener">Abrir en Waze</a>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <h3>Confirmación</h3>
+        <p class="intro-copy">Por favor confirma tu asistencia para preparar una fiesta inolvidable.</p>
+        <div class="actions">
+          <a class="btn btn-primary" id="whatsappBtn" href="https://wa.me/573001234567?text=Hola,%20confirmo%20mi%20asistencia%20al%20cumplea%C3%B1os%20de%20Luz%20Marina%20Gutierrez" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">Hecha para celebrar a lo grande con color, música y corazón caribeño.</div>
+  </div>
+
+  <audio id="bgMusic" loop preload="none">
+    <source src="carnaval-instrumental.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const envelope = document.getElementById('envelope');
+    const detailsSection = document.getElementById('detailsSection');
+    const scrollBtn = document.getElementById('scrollToEnvelope');
+    const musicBtn = document.getElementById('musicBtn');
+    const music = document.getElementById('bgMusic');
+    const targetDate = new Date('2026-09-14T16:00:00').getTime();
+    const locationQuery = 'Casa de Campo Las Marías Valledupar';
+    const encodedLocation = encodeURIComponent(locationQuery);
+    let opened = false;
+    let playing = false;
+
+    document.getElementById('mapsBtn').href = `https://www.google.com/maps/search/?api=1&query=${encodedLocation}`;
+    document.getElementById('wazeBtn').href = `https://waze.com/ul?q=${encodedLocation}`;
+    document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${encodedLocation}&output=embed`;
+
+    scrollBtn.addEventListener('click', () => {
+      document.getElementById('sobre').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    const openEnvelope = () => {
+      if (opened) return;
+      opened = true;
+      envelope.classList.add('open');
+      launchConfetti(44);
+      setTimeout(() => {
+        detailsSection.classList.add('show');
+        detailsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 980);
+    };
+
+    envelope.addEventListener('click', openEnvelope);
+    envelope.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openEnvelope();
+      }
+    });
+
+    function updateCountdown() {
+      const now = Date.now();
+      const distance = targetDate - now;
+      const daysEl = document.getElementById('days');
+      const hoursEl = document.getElementById('hours');
+      const minutesEl = document.getElementById('minutes');
+      const secondsEl = document.getElementById('seconds');
+
+      if (distance <= 0) {
+        daysEl.textContent = '00';
+        hoursEl.textContent = '00';
+        minutesEl.textContent = '00';
+        secondsEl.textContent = '00';
+        return;
+      }
+
+      const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+      daysEl.textContent = String(d).padStart(2, '0');
+      hoursEl.textContent = String(h).padStart(2, '0');
+      minutesEl.textContent = String(m).padStart(2, '0');
+      secondsEl.textContent = String(s).padStart(2, '0');
+    }
+
+    function launchConfetti(amount = 34) {
+      const colors = ['#ffd43b', '#ff8c42', '#ff4fa3', '#1db8ff', '#00c7b1', '#ffffff'];
+      for (let i = 0; i < amount; i++) {
+        const confetti = document.createElement('span');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDuration = (Math.random() * 2 + 2.8) + 's';
+        confetti.style.transform = `translateY(0) rotate(${Math.random() * 180}deg)`;
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 5200);
+      }
+    }
+
+    musicBtn.addEventListener('click', async () => {
+      const source = music.querySelector('source');
+      if (!source || !source.getAttribute('src')) {
+        alert('Agrega tu archivo de música como carnaval-instrumental.mp3 en la misma carpeta del HTML.');
+        return;
+      }
+      try {
+        if (!playing) {
+          await music.play();
+          musicBtn.textContent = '❚❚';
+          launchConfetti(18);
+        } else {
+          music.pause();
+          musicBtn.textContent = '♫';
+        }
+        playing = !playing;
+      } catch (error) {
+        alert('Toca nuevamente para activar la música. Algunos navegadores bloquean la reproducción automática.');
+      }
+    });
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
