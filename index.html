@@ -626,6 +626,149 @@
       50% { transform: translateY(14px); }
     }
 
+
+    .invitee-card {
+      background: linear-gradient(135deg, rgba(255,255,255,.96), rgba(255,244,221,.96));
+      border: 2px solid rgba(255,255,255,.6);
+      border-radius: 28px;
+      padding: 20px;
+      margin-bottom: 18px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .invitee-card .overline {
+      font-size: .74rem;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      font-weight: 700;
+      color: #9062a8;
+    }
+
+    .invitee-card h3 {
+      margin: 8px 0 4px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+    }
+
+    .passes {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--yellow), var(--orange));
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .gift-card {
+      background: linear-gradient(135deg, #fff8ce, #ffe6f1);
+      border: 2px dashed #ff8c42;
+      text-align: center;
+    }
+
+    .gift-icon {
+      font-size: 2.4rem;
+      margin-bottom: 8px;
+    }
+
+    .gift-highlight {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: #d24a73;
+      margin: 4px 0 8px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 78px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      border-radius: 20px;
+      background: #fff;
+      border: 1px solid #f1dff0;
+    }
+
+    .timeline-time {
+      font-weight: 700;
+      color: #d24a73;
+    }
+
+    .timeline-event {
+      text-align: left;
+      color: var(--ink);
+    }
+
+    .photo-zoom {
+      cursor: zoom-in;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(12, 8, 24, .92);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .lightbox.show {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 96vw;
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: 18px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.45);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 0;
+      background: rgba(255,255,255,.95);
+      color: var(--ink);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .brand-signature {
+      padding: 0 20px 28px;
+      text-align: center;
+      color: rgba(255,255,255,.82);
+      font-size: .68rem;
+      line-height: 1.45;
+    }
+
+    .brand-signature strong {
+      font-weight: 700;
+      color: #fff;
+    }
+
+
+    .admin-panel{display:none;min-height:100vh;padding:28px 18px 40px;background:linear-gradient(135deg,#2b2140,#5b2f8d 55%,#1b78b9);color:#fff}
+    .admin-panel.show{display:block}.admin-shell{max-width:560px;margin:0 auto;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:30px;padding:22px;backdrop-filter:blur(10px);box-shadow:0 20px 50px rgba(0,0,0,.22)}
+    .admin-shell h1{margin:0 0 8px;font-family:'Playfair Display',serif;font-size:2rem}.admin-shell p{margin:0 0 20px;color:rgba(255,255,255,.86);line-height:1.6}
+    .admin-field{margin-bottom:16px;text-align:left}.admin-field label{display:block;margin-bottom:7px;font-size:.85rem;font-weight:700}.admin-field input{width:100%;border:0;border-radius:16px;padding:13px 14px;font:inherit;outline:none}
+    .admin-actions{display:grid;gap:10px;margin-top:14px}.admin-result{display:none;margin-top:20px;padding:16px;border-radius:20px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2)}.admin-result.show{display:block}
+    .admin-link{width:100%;min-height:88px;resize:vertical;border:0;border-radius:14px;padding:12px;font:inherit;margin:10px 0}.admin-note{font-size:.78rem;color:rgba(255,255,255,.75);margin-top:12px}
+
     @media (max-width: 360px) {
       .envelope { width: 288px; height: 208px; }
       .countdown { grid-template-columns: repeat(2, 1fr); }
@@ -635,9 +778,30 @@
   </style>
 </head>
 <body>
+
+  <section class="admin-panel" id="adminPanel">
+    <div class="admin-shell">
+      <h1>Generador de invitaciones</h1>
+      <p>Crea un enlace personalizado por invitado o familia y define los cupos asignados.</p>
+      <div class="admin-field"><label for="adminGuest">Nombre del invitado o familia</label><input id="adminGuest" type="text" placeholder="Ej. Familia Martínez"></div>
+      <div class="admin-field"><label for="adminPasses">Cupos asignados</label><input id="adminPasses" type="number" min="1" step="1" value="1"></div>
+      <div class="admin-actions"><button class="btn btn-primary" id="generateInviteBtn" type="button">🔗 Generar invitación</button></div>
+      <div class="admin-result" id="adminResult">
+        <strong id="adminSummary"></strong>
+        <textarea class="admin-link" id="generatedLink" readonly></textarea>
+        <div class="admin-actions">
+          <button class="btn btn-secondary" id="copyLinkBtn" type="button">📋 Copiar enlace</button>
+          <button class="btn btn-outline" id="shareWhatsappBtn" type="button">💬 Preparar mensaje para WhatsApp</button>
+          <button class="btn btn-outline" id="newInviteBtn" type="button">➕ Generar otra invitación</button>
+        </div>
+        <div class="admin-note">Para mayor impacto, envía primero una foto de portada por WhatsApp y luego el mensaje personalizado con este enlace.</div>
+      </div>
+    </div>
+  </section>
+
   <button class="music-btn" id="musicBtn" aria-label="Reproducir música">♫</button>
 
-  <div class="page">
+  <div class="page" id="invitePage">
     <section class="hero">
       <div class="hero-card">
         <p class="eyebrow">Fiesta Caribeña Premium</p>
@@ -647,7 +811,7 @@
         <div class="hero-photo">
           <img src="foto-principal.jpg" alt="Luz Marina Gutierrez">
         </div>
-        <div class="hero-date">14 · septiembre · 2026 · 4:00 PM</div>
+        <div class="hero-date">26 · septiembre · 2026 · 4:00 PM</div>
         <div class="chip-row">
           <span class="chip">🥁 Carnaval</span>
           <span class="chip">💃 Baile</span>
@@ -680,9 +844,16 @@
       <div class="hint">Toca el sobre para empezar la fiesta 🎉</div>
     </section>
 
+    
     <section class="section details" id="detailsSection">
+      <div class="invitee-card" id="inviteeCard">
+        <div class="overline">Invitación especial para</div>
+        <h3 id="guestName">Invitado especial</h3>
+        <div class="passes" id="guestPasses">Cupos asignados: 1</div>
+      </div>
+
       <div class="main-photo-card">
-        <img src="foto-portada-secundaria.jpg" alt="Luz Marina celebrando">
+        <img src="foto-portada-secundaria.jpg" alt="Luz Marina celebrando" class="photo-zoom">
         <div class="main-photo-overlay">
           <h3>¡Quien lo vive es quien lo goza!</h3>
           <p>Prepárate para una celebración caribeña con mucha energía, amigos, música, color y un ambiente inolvidable.</p>
@@ -691,7 +862,7 @@
 
       <div class="glass-card">
         <h3>Bienvenidos a la fiesta</h3>
-        <p class="intro-copy">Con inmensa alegría, Luz Marina Gutierrez quiere compartir contigo sus 62 años en una reunión llena de baile, sonrisas, cerveza fría, sabor caribeño y la mejor compañía. Tu presencia hará esta noche aún más especial.</p>
+        <p class="intro-copy">Con inmensa alegría, Luz Marina Gutierrez quiere compartir contigo sus 62 años en una reunión llena de baile, sonrisas, sabor caribeño y la mejor compañía. Tu presencia hará esta noche aún más especial.</p>
       </div>
 
       <div class="glass-card">
@@ -699,7 +870,7 @@
         <div class="info-grid">
           <div class="info-item">
             <div class="label">Fecha</div>
-            <div class="value">14 de septiembre de 2026</div>
+            <div class="value">26 de septiembre de 2026</div>
           </div>
           <div class="info-item">
             <div class="label">Hora</div>
@@ -707,17 +878,20 @@
           </div>
           <div class="info-item">
             <div class="label">Lugar</div>
-            <div class="value">Casa de Campo Las Marías</div>
-          </div>
-          <div class="info-item">
-            <div class="label">Regalo</div>
-            <div class="value">Lluvia de sobres</div>
+            <div class="value">Conjunto Inmobiliaria CASA É CAMPO<br><small>Frente a la Feria Ganadera “VILLA GUADALUPE” · Valledupar, Cesar</small></div>
           </div>
           <div class="info-item">
             <div class="label">Dress code</div>
-            <div class="value">Informal o carnavalera</div>
+            <div class="value">Hombres y mujeres: atuendo informal con colores caribeños, alegres y vibrantes</div>
           </div>
         </div>
+      </div>
+
+      <div class="glass-card gift-card">
+        <div class="gift-icon">🎁</div>
+        <div class="label">Detalle de regalo</div>
+        <div class="gift-highlight">Lluvia de sobres</div>
+        <p class="intro-copy">Tu presencia es lo más importante. Si deseas tener un detalle con Luz Marina, la celebración contará con lluvia de sobres.</p>
       </div>
 
       <div class="glass-card">
@@ -732,14 +906,26 @@
       </div>
 
       <div class="glass-card">
+        <h3>Itinerario de la celebración</h3>
+        <p class="intro-copy">Una tarde y noche pensadas para disfrutar cada momento con alegría.</p>
+        <div class="timeline">
+          <div class="timeline-item"><div class="timeline-time">4:00 PM</div><div class="timeline-event">🎉 Inicio del evento y bienvenida</div></div>
+          <div class="timeline-item"><div class="timeline-time">5:00 PM</div><div class="timeline-event">🍹 Cóctel de bienvenida</div></div>
+          <div class="timeline-item"><div class="timeline-time">7:00 PM</div><div class="timeline-event">🍽️ Cena</div></div>
+          <div class="timeline-item"><div class="timeline-time">8:00 PM</div><div class="timeline-event">💃 Fiesta, música y baile</div></div>
+          <div class="timeline-item"><div class="timeline-time">12:00 AM</div><div class="timeline-event">✨ Cierre del evento</div></div>
+        </div>
+      </div>
+
+      <div class="glass-card">
         <h3>Galería de Luz Marina</h3>
         <div class="gallery">
-          <img src="foto1.jpg" alt="Luz Marina 1">
-          <img src="foto2.jpg" alt="Luz Marina 2">
-          <img src="foto3.jpg" alt="Luz Marina 3">
-          <img src="foto4.jpg" alt="Luz Marina 4">
-          <img src="foto5.jpg" alt="Luz Marina 5">
-          <img src="foto6.jpg" alt="Luz Marina 6">
+          <img src="foto1.jpg" alt="Luz Marina 1" class="photo-zoom">
+          <img src="foto2.jpg" alt="Luz Marina 2" class="photo-zoom">
+          <img src="foto3.jpg" alt="Luz Marina 3" class="photo-zoom">
+          <img src="foto4.jpg" alt="Luz Marina 4" class="photo-zoom">
+          <img src="foto5.jpg" alt="Luz Marina 5" class="photo-zoom">
+          <img src="foto6.jpg" alt="Luz Marina 6" class="photo-zoom">
         </div>
       </div>
 
@@ -747,11 +933,11 @@
         <h3>Ambiente de fiesta</h3>
         <div class="collage">
           <div class="collage-card">
-            <img src="combo1.jpg" alt="Luz Marina con cerveza y ambiente festivo">
+            <img src="combo1.jpg" alt="Luz Marina con cerveza y ambiente festivo" class="photo-zoom">
             <span>🍻 Brindis y alegría</span>
           </div>
           <div class="collage-card">
-            <img src="combo2.jpg" alt="Cumpleaños estilo carnaval">
+            <img src="combo2.jpg" alt="Cumpleaños estilo carnaval" class="photo-zoom">
             <span>🎭 Sabor caribeño</span>
           </div>
         </div>
@@ -759,24 +945,39 @@
 
       <div class="glass-card">
         <h3>Ubicación</h3>
-        <p class="intro-copy">Llega fácil al evento con el mapa interactivo o abre la ruta directa en tu app favorita.</p>
-        <iframe class="map-frame" id="mapFrame" src="https://www.google.com/maps?q=Casa%20de%20Campo%20Las%20Mar%C3%ADas%20Valledupar&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <p class="intro-copy"><strong>Conjunto Inmobiliaria CASA É CAMPO</strong><br>Frente a la Feria Ganadera “VILLA GUADALUPE” · Valledupar, Cesar.</p>
+        <iframe class="map-frame" id="mapFrame" src="https://www.google.com/maps?q=Conjunto%20Inmobiliaria%20CASA%20%C3%89%20CAMPO%20Valledupar&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         <div class="actions">
-          <a class="btn btn-secondary" id="mapsBtn" href="#" target="_blank" rel="noopener">Abrir en Google Maps</a>
-          <a class="btn btn-outline" id="wazeBtn" href="#" target="_blank" rel="noopener">Abrir en Waze</a>
+          <a class="btn btn-secondary" id="mapsBtn" href="https://maps.app.goo.gl/LYb2YysRsZXM25xa6" target="_blank" rel="noopener">📍 Abrir ubicación exacta en Google Maps</a>
         </div>
       </div>
 
       <div class="glass-card">
-        <h3>Confirmación</h3>
-        <p class="intro-copy">Por favor confirma tu asistencia para preparar una fiesta inolvidable.</p>
+        <h3>Confirmación de asistencia</h3>
+        <p class="intro-copy">Confirma tu asistencia en el formulario. La invitación es válida únicamente para los cupos asignados.</p>
         <div class="actions">
-          <a class="btn btn-primary" id="whatsappBtn" href="https://wa.me/573137404130?text=Hola,%20confirmo%20mi%20asistencia%20al%20cumplea%C3%B1os%20de%20Luz%20Marina%20Gutierrez" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
+          <a class="btn btn-primary" id="rsvpBtn" href="#" target="_blank" rel="noopener">✅ Confirmar asistencia</a>
+          <a class="btn btn-outline" id="whatsappBtn" href="https://wa.me/573137404130?text=Hola,%20tengo%20una%20pregunta%20sobre%20el%20cumplea%C3%B1os%20de%20Luz%20Marina%20Gutierrez" target="_blank" rel="noopener">💬 Preguntas o dudas por WhatsApp</a>
         </div>
+      </div>
+
+      <div class="glass-card">
+        <h3>Comparte tus fotos y videos</h3>
+        <p class="intro-copy">Después de la fiesta, comparte aquí tus mejores fotos y videos para reunir todos los recuerdos en un solo lugar.</p>
+        <div class="actions">
+          <a class="btn btn-secondary" id="mediaFormBtn" href="#" target="_blank" rel="noopener">📸 Subir fotos y videos</a>
+        </div>
+      </div>
       </div>
     </section>
 
-    <div class="footer">Hecha para celebrar a lo grande con color, música y corazón caribeño.<br>Desarrollado por Alvaro Ariza</div>
+    <div class="footer">Hecha para celebrar a lo grande con color, música y corazón caribeño.</div>
+    <div class="brand-signature">Invitaciones digitales interactivas<br>A product by <strong>Datappia</strong><br>© 2026</div>
+  </div>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar imagen">×</button>
+    <img id="lightboxImage" src="" alt="Foto ampliada">
   </div>
 
   <audio id="bgMusic" loop preload="none">
@@ -789,15 +990,139 @@
     const scrollBtn = document.getElementById('scrollToEnvelope');
     const musicBtn = document.getElementById('musicBtn');
     const music = document.getElementById('bgMusic');
-    const targetDate = new Date('2026-09-14T16:00:00').getTime();
-    const locationQuery = 'Casa de Campo Las Marías Valledupar';
-    const encodedLocation = encodeURIComponent(locationQuery);
+    const targetDate = new Date('2026-09-26T16:00:00').getTime();
     let opened = false;
     let playing = false;
 
-    document.getElementById('mapsBtn').href = `https://www.google.com/maps/search/?api=1&query=${encodedLocation}`;
-    document.getElementById('wazeBtn').href = `https://waze.com/ul?q=${encodedLocation}`;
-    document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${encodedLocation}&output=embed`;
+    const params = new URLSearchParams(window.location.search);
+
+    const isAdmin = params.get('admin') === '1';
+
+    if (isAdmin) {
+      document.getElementById('invitePage').style.display = 'none';
+      document.getElementById('musicBtn').style.display = 'none';
+      document.getElementById('adminPanel').classList.add('show');
+    }
+
+    const adminGuestInput = document.getElementById('adminGuest');
+    const adminPassesInput = document.getElementById('adminPasses');
+    const adminResult = document.getElementById('adminResult');
+    const adminSummary = document.getElementById('adminSummary');
+    const generatedLink = document.getElementById('generatedLink');
+
+    const buildInviteUrl = (guestName, guestPasses) => {
+      const base = `${window.location.origin}${window.location.pathname}`;
+      const url = new URL(base);
+      url.searchParams.set('invitado', guestName);
+      url.searchParams.set('cupos', guestPasses);
+      return url.toString();
+    };
+
+    document.getElementById('generateInviteBtn').addEventListener('click', () => {
+      const guestName = adminGuestInput.value.trim();
+      const guestPasses = Math.max(1, parseInt(adminPassesInput.value, 10) || 1);
+      if (!guestName) { alert('Escribe el nombre del invitado o la familia.'); adminGuestInput.focus(); return; }
+      generatedLink.value = buildInviteUrl(guestName, guestPasses);
+      adminSummary.textContent = `${guestName} · ${guestPasses} ${guestPasses === 1 ? 'cupo' : 'cupos'}`;
+      adminResult.classList.add('show');
+    });
+
+    document.getElementById('copyLinkBtn').addEventListener('click', async () => {
+      if (!generatedLink.value) return;
+      try { await navigator.clipboard.writeText(generatedLink.value); alert('Enlace copiado.'); }
+      catch { generatedLink.select(); document.execCommand('copy'); alert('Enlace copiado.'); }
+    });
+
+    document.getElementById('shareWhatsappBtn').addEventListener('click', () => {
+      if (!generatedLink.value) return;
+      const guestName = adminGuestInput.value.trim();
+      const guestPasses = Math.max(1, parseInt(adminPassesInput.value, 10) || 1);
+      const message = `🎉💃 ¡Tenemos una invitación muy especial para ti! 💃🎉
+
+Luz Marina quiere celebrar sus 62 años rodeada de personas muy especiales. ❤️
+
+Será una tarde llena de alegría, música, baile y mucho sabor caribeño. 🎭🥁✨
+
+Tu invitación ha sido preparada especialmente para:
+
+*${guestName}*
+🎟️ *Cupos reservados: ${guestPasses}*
+
+Abre tu invitación aquí 👇
+${generatedLink.value}
+
+✨ Esperamos contar contigo para celebrar juntos este momento tan especial.
+
+Con cariño,
+Luz Marina 🎂💐`;
+      window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+    });
+
+    document.getElementById('newInviteBtn').addEventListener('click', () => {
+      adminGuestInput.value=''; adminPassesInput.value='1'; generatedLink.value=''; adminSummary.textContent=''; adminResult.classList.remove('show'); adminGuestInput.focus();
+    });
+    const guest = params.get('invitado') || 'Invitado especial';
+    const passes = params.get('cupos') || '1';
+
+    if (!isAdmin) {
+      document.getElementById('guestName').textContent = guest;
+      document.getElementById('guestPasses').textContent = `Cupos asignados: ${passes}`;
+    }
+
+    // Reemplaza estos dos enlaces por los Google Forms definitivos.
+    const RSVP_FORM_URL = 'https://forms.gle/MsKhiuKne5AR9qPJ8';
+    const MEDIA_FORM_URL = 'https://forms.gle/RtpJdV7NZUoJZCY19';
+
+    const buildFormUrl = (baseUrl) => {
+      if (!baseUrl || baseUrl.startsWith('PEGA_AQUI')) return '#';
+      const separator = baseUrl.includes('?') ? '&' : '?';
+      return `${baseUrl}${separator}invitado=${encodeURIComponent(guest)}&cupos=${encodeURIComponent(passes)}`;
+    };
+
+    document.getElementById('rsvpBtn').href = buildFormUrl(RSVP_FORM_URL);
+    document.getElementById('mediaFormBtn').href = buildFormUrl(MEDIA_FORM_URL);
+
+    document.getElementById('rsvpBtn').addEventListener('click', (e) => {
+      if (e.currentTarget.getAttribute('href') === '#') {
+        e.preventDefault();
+        alert('Falta agregar el enlace del Google Form de confirmación en el código.');
+      }
+    });
+
+    document.getElementById('mediaFormBtn').addEventListener('click', (e) => {
+      if (e.currentTarget.getAttribute('href') === '#') {
+        e.preventDefault();
+        alert('Falta agregar el enlace del Google Form para fotos y videos en el código.');
+      }
+    });
+
+    const zoomableImages = document.querySelectorAll('.photo-zoom');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    zoomableImages.forEach((img) => {
+      img.addEventListener('click', () => {
+        lightboxImage.src = img.src;
+        lightboxImage.alt = img.alt || 'Foto ampliada';
+        lightbox.classList.add('show');
+        lightbox.setAttribute('aria-hidden', 'false');
+      });
+    });
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('show');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lightboxImage.src = '';
+    };
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
 
     scrollBtn.addEventListener('click', async () => {
       document.getElementById('sobre').scrollIntoView({ behavior: 'smooth' });
@@ -900,10 +1225,11 @@
       } catch (error) {}
     }
 
-    window.addEventListener('load', tryAutoPlayOnLoad);
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    if (!isAdmin) {
+      window.addEventListener('load', tryAutoPlayOnLoad);
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
   </script>
 </body>
 </html>
